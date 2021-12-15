@@ -1,0 +1,99 @@
+.home-page {
+  width: 100%;
+  padding-bottom: 32px;
+
+  .home-header {
+    padding: 32px 0px;
+    text-align: center;
+
+    h1 {
+      font-size: 40px;
+
+      @media only screen and (max-width: 700px) {
+        font-size: 34px;
+      }
+    }
+
+    p {
+      margin-top: 25px;
+      font-size: 28px;
+    }
+  }
+
+  .home-artists {
+    width: 90%;
+    max-width: 903px;
+    margin: 72px auto 32px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    //   grid-template-columns: repeat(auto-fit, minmax(200px, 284px));
+
+    .home-artiste-card {
+      border-radius: 5px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease-in-out;
+      box-shadow: var(--shadow);
+
+      &__header {
+        width: 100%;
+
+        h3 {
+          font-size: 22px;
+          font-weight: 700;
+        }
+      }
+
+      &__body {
+        margin: 18px 0px 32px;
+        display: flex;
+        align-items: center;
+
+        .artiste-handle {
+          margin-right: 16px;
+          color: rgb(153, 152, 152);
+          font-size: 14px;
+        }
+
+        .artiste-website {
+          width: fit-content;
+
+          a {
+            color: rgb(153, 152, 152);
+            font-size: 14px;
+            display: block;
+            font-weight: 600;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      &__footer {
+        margin-top: auto;
+        width: 100%;
+
+        .home-card-links {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          a {
+            color: rgb(94, 94, 246);
+            font-size: 15px;
+            display: block;
+            font-weight: 700;
+
+            &:hover {
+              opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+  }
+}

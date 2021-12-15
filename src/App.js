@@ -1,11 +1,13 @@
 import React from "react";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import { HomePage } from "./pages/home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/dashboard/opportunities" element={<Opportunities />} /> */}
+        <Route path="/" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
