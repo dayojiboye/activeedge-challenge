@@ -6,6 +6,10 @@
     padding: 32px 0px;
     text-align: center;
 
+    @media only screen and (max-width: 700px) {
+      padding: 32px 16px;
+    }
+
     h1 {
       font-size: 40px;
 
@@ -27,7 +31,11 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    //   grid-template-columns: repeat(auto-fit, minmax(200px, 284px));
+
+    @media only screen and (max-width: 903px) {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 284px));
+      justify-content: center;
+    }
 
     .home-artiste-card {
       border-radius: 5px;
@@ -52,10 +60,19 @@
         display: flex;
         align-items: center;
 
+        @media only screen and (max-width: 320px) {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
         .artiste-handle {
           margin-right: 16px;
           color: rgb(153, 152, 152);
           font-size: 14px;
+
+          @media only screen and (max-width: 320px) {
+            margin-bottom: 10px;
+          }
         }
 
         .artiste-website {
@@ -83,11 +100,24 @@
           align-items: center;
           justify-content: space-between;
 
+          @media only screen and (max-width: 320px) {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
           a {
             color: rgb(94, 94, 246);
             font-size: 15px;
             display: block;
             font-weight: 700;
+
+            @media only screen and (max-width: 320px) {
+              margin-bottom: 10px;
+
+              &:last-of-type {
+                margin-bottom: 0px;
+              }
+            }
 
             &:hover {
               opacity: 0.8;
