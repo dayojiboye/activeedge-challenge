@@ -65,7 +65,12 @@ const Home = () => {
                 <Link to="/albums" state={{ name: item.name, id: item.id }}>
                   View Albums
                 </Link>
-                <a href="/">View Comments</a>
+                <Link
+                  to="/comments"
+                  state={{ name: item.name, email: item.email }}
+                >
+                  View Comments
+                </Link>
               </div>
             </div>
           </div>
