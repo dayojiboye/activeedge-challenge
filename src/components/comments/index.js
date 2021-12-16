@@ -10,6 +10,7 @@ const CommentsPage = () => {
   const [tweet, setTweet] = useState("");
   const [loading, setLoading] = useState(false);
   const [tweetLoading, setTweetLoading] = useState(false);
+  const [edit, setEdit] = useState(null);
   const location = useLocation();
 
   async function fetchComments() {
@@ -43,12 +44,66 @@ const CommentsPage = () => {
           },
         }
       );
-      setComments([...comments, res.data]);
+      setComments([
+        ...comments,
+        {
+          body: res.data.body,
+          email: res.data.email,
+          id: comments.length + 1,
+          name: res.data.name,
+        },
+      ]);
       setTweet("");
     } catch (err) {
       console.log(err);
     } finally {
       setTweetLoading(false);
+    }
+  }
+
+  async function editTweet(tweetId, name, email) {
+    setTweetLoading(true);
+
+    try {
+      const res = await axios.put(
+        `/comments/${tweetId}`,
+        {
+          body: tweet,
+          name,
+          email,
+        },
+        {
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
+
+      const singleTweet = comments.findIndex((x) => tweetId === x.id);
+
+      const copy = [...comments];
+
+      copy.splice(singleTweet, 1, { ...res.data });
+
+      setComments([...copy]);
+
+      setTweet("");
+      setEdit(null);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setTweetLoading(false);
+    }
+  }
+
+  async function deleteTweet(tweetId) {
+    try {
+      await axios.delete(`/comments/${tweetId}`);
+
+      const filtered = comments.filter((x) => x.id !== tweetId);
+      setComments([...filtered]);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -77,8 +132,8 @@ const CommentsPage = () => {
       </div>
 
       <div className="comments-wrapper">
-        {comments?.map((item) => (
-          <div key={item.id} className="comment">
+        {comments?.map((item, index) => (
+          <div key={index} className="comment">
             <div className="comment-head">
               <div className="comment-name">{item.name}</div>
               <div className="comment-email">{item.email}</div>
@@ -87,13 +142,39 @@ const CommentsPage = () => {
             <div className="comment-body">
               <p>{item.body}</p>
             </div>
+
+            <div className="comment-actions">
+              <button
+                className="comment-edit"
+                onClick={() => {
+                  setEdit({
+                    id: item.id,
+                    name: item.name,
+                    email: item.email,
+                  });
+                  setTweet(item.body);
+                }}
+              >
+                <i className="fal fa-edit"></i>
+              </button>
+              <button
+                className="comment-delete"
+                onClick={() => deleteTweet(item.id)}
+              >
+                <i className="fal fa-trash-alt"></i>
+              </button>
+            </div>
           </div>
         ))}
 
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            postTweet();
+            if (edit) {
+              editTweet(edit.id, edit.name, edit.email);
+            } else {
+              postTweet();
+            }
           }}
           className="comment-input"
         >
