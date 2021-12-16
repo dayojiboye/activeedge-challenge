@@ -19,8 +19,8 @@ body {
   text-rendering: optimizeLegibility;
   width: 100%;
   height: 100%;
-  background: #e5e5e5;
-  color: var(--black);
+  background: var(--black);
+  color: var(--text-primary);
 }
 
 #root {

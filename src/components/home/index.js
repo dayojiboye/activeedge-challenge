@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import axios from "../../utils/axios";
 import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [artistes, setArtistes] = useState([]);
@@ -61,7 +62,9 @@ const Home = () => {
             </div>
             <div className="home-artiste-card__footer">
               <div className="home-card-links">
-                <a href="/">View Albums</a>
+                <Link to="/albums" state={{ name: item.name, id: item.id }}>
+                  View Albums
+                </Link>
                 <a href="/">View Comments</a>
               </div>
             </div>

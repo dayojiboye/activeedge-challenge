@@ -36,6 +36,7 @@
       flex-direction: column;
       transition: box-shadow 0.3s ease-in-out;
       box-shadow: var(--shadow);
+      border: 1px solid var(--fade);
 
       &__header {
         width: 100%;
